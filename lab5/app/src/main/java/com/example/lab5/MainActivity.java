@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateProduct(productId, String.valueOf(editName), Double.parseDouble(editPrice.getText().toString()));
+                updateProduct(productId, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
+                setContentView(R.layout.activity_main);
             }
         });
 
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deleteProduct(productId);
+                setContentView(R.layout.activity_main);
             }
         });
     }
@@ -137,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     private void addProduct() {
 
         String name = editTextName.getText().toString().trim();
-        double price = Double.parseDouble(String.valueOf(editTextName.getText().toString()));
+        double price = Double.parseDouble(editTextPrice.getText().toString());
 
         if (!TextUtils.isEmpty(name)) {
             String id = databaseProducts.push().getKey();
