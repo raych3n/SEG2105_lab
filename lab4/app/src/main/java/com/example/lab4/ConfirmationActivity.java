@@ -1,7 +1,7 @@
 package com.example.lab4;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 

@@ -26,45 +26,35 @@ public class MainActivity extends Activity {
     }
 
     public void openInGoogleMaps (View view) {
+        EditText teamPostalCode = (EditText) findViewById(R.id.postalCodeId);
 
-        EditText teamPostalCode = findViewById(R.id.postalCodeId);
-
-        Uri gmmIntentUri = Uri.parse("https://maps.google.com/maps?q=" + teamPostalCode.getText());
+        Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q=" + teamPostalCode.getText());
 
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
         mapIntent.setPackage("com.google.android.apps.maps");
+
         startActivity(mapIntent);
     }
 
     public void submit (View view) {
-        EditText teamNameView = findViewById(R.id.teamNameViewId);
-        EditText postalCodeView = findViewById(R.id.postalCodeId);
+        EditText teamNameView = (EditText) findViewById(R.id.teamNameViewId);
+        EditText postalCodeView = (EditText) findViewById(R.id.postalCodeId);
 
         String teamName = teamNameView.getText().toString();
         String postalCode = postalCodeView.getText().toString();
 
         Team team = new Team(teamName, postalCode, drawableName);
 
-        Intent intent = new Intent(getApplicationContext(), ConfirmationActivity.class);
+        Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);
         intent.putExtra("teamInfo", team);
         startActivity(intent);
     }
 
-    public void setTeamIcon(View view){
-        Intent returnIntent = new Intent();
-
-        ImageView selectedImage = (ImageView) view;
-
-        returnIntent.putExtra("ImageID", selectedImage.getId());
-        setResult(RESULT_OK, returnIntent);
-
-        finish();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        ImageView logoImage = findViewById(R.id.logoImage);
+        ImageView logoImage = (ImageView) findViewById(R.id.logoImage);
 
         drawableName = "ic_logo_00";
         int imageID = data.getIntExtra("imageID", R.id.teamid00);
