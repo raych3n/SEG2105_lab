@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateProduct(productId, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
-                setContentView(R.layout.activity_main);
+                Intent reset = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(reset);
             }
         });
 
@@ -115,7 +116,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deleteProduct(productId);
-                setContentView(R.layout.activity_main);
+                Intent reset = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(reset);
             }
         });
     }
