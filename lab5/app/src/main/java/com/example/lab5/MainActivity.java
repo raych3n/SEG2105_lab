@@ -1,5 +1,6 @@
 package com.example.lab5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -94,6 +95,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void showUpdateDeleteDialog(final String productId, String productName) {
         // add code here...
+        //change view to update_dialog, get values entered and put them into updateProduct and delete product
+        setContentView(R.layout.update_dialog);
+
+        Button buttonUpdate = (Button) findViewById(R.id.buttonUpdateProduct);
+        Button buttonDelete = (Button) findViewById(R.id.buttonDeleteProduct);
+        EditText editName = (EditText) findViewById(R.id.editTextName);
+        EditText editPrice = (EditText) findViewById(R.id.editTextPrice);
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateProduct(productId, editName.getText().toString(), Double.parseDouble(editPrice.getText().toString()));
+                Intent reset = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(reset);
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteProduct(productId);
+                Intent reset = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(reset);
+            }
+        });
     }
 
     private void updateProduct(String id, String name, double price) {
@@ -115,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     private void addProduct() {
 
         String name = editTextName.getText().toString().trim();
-        double price = Double.parseDouble(String.valueOf(editTextName.getText().toString()));
+        double price = Double.parseDouble(editTextPrice.getText().toString());
 
         if (!TextUtils.isEmpty(name)) {
             String id = databaseProducts.push().getKey();
