@@ -37,15 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
         valid = findViewById(R.id.isTextValid);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submit.setOnClickListener(view -> {
                 if (!vlad.validate(fName.getText().toString())) valid.setText("invalid first name");
                 else if (!vlad.validate(lName.getText().toString())) valid.setText("invalid last name");
                 else if (!vlad.validate(email.getText().toString())) valid.setText("invalid email");
                 else if (!vlad.validate(password.getText().toString())) valid.setText("invalid password");
                 else valid.setText("valid");
-            }
         });
 
     }
