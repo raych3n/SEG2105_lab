@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     EditText fName, lName, email, password;
+    TextView valid;
     Button submit;
+    private ValidateDetails vlad = new ValidateDetails();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +35,18 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         submit = findViewById(R.id.submit);
 
+        valid = findViewById(R.id.isTextValid);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validate(fName)) Toast.makeText(v.getContext(), "invalid first name", Toast.LENGTH_LONG).show();
-                else if (!validate(lName)) Toast.makeText(v.getContext(), "invalid last name", Toast.LENGTH_LONG).show();
-                else if (!validate(email)) Toast.makeText(v.getContext(), "invalid email", Toast.LENGTH_LONG).show();
-                else if (!validate(password)) Toast.makeText(v.getContext(), "invalid password", Toast.LENGTH_LONG).show();
-                else Toast.makeText(v.getContext(), "valid", Toast.LENGTH_LONG).show();
+                if (!vlad.validate(fName.getText().toString())) valid.setText("invalid first name");
+                else if (!vlad.validate(lName.getText().toString())) valid.setText("invalid last name");
+                else if (!vlad.validate(email.getText().toString())) valid.setText("invalid email");
+                else if (!vlad.validate(password.getText().toString())) valid.setText("invalid password");
+                else valid.setText("valid");
             }
         });
 
-    }
-
-    public boolean validate(EditText txt) {
-        return txt.length() > 0;
     }
 }
